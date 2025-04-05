@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чернобыльская АЭС - Инцидент 1986</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #00FF00;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: #00FF00;
+            text-transform: uppercase;
+        }
+        
+        .dosimeter {
+            border: 2px solid #00FF00;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-family: 'Segment7', monospace;
+        }
+        
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .terminal {
+            border: 1px solid #00FF00;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #001100;
+        }
+        
+        @font-face {
+            font-family: 'Segment7';
+            src: url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+        }
+        
+        .warning {
+            color: #FF0000;
+            animation: blink 0.5s step-end infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Чернобыльская АЭС :: Отчет об инциденте</h1>
+        <div class="dosimeter">
+            ДОЗИМЕТР ГЕЙГЕРА: <span id="radiation">3.6</span> РЕНТГЕН <span class="blink">_</span>
+        </div>
+        
+        <div class="terminal">
+            > СИСТЕМА ДОСТУПА: УРОВЕНЬ 4<br>
+            > ДАТА: 26.04.1986<br>
+            > ВРЕМЯ: 01:23:45 MSK<br>
+            > СТАТУС: <span class="warning">АВАРИЯ</span>
+        </div>
+        
+        <h2>События 4-го энергоблока</h2>
+        <p>
+            26 апреля 1986 года в 01:23:45 на 4-м энергоблоке Чернобыльской АЭС произошёл взрыв, который полностью разрушил реактор. Здание энергоблока частично обрушилось, начался пожар.
+        </p>
+        
+        <h3>Технические параметры перед аварией:</h3>
+        <ul>
+            <li>Тип реактора: РБМК-1000</li>
+            <li>Тепловая мощность: 3200 МВт</li>
+            <li>Давление в контуре: 70 кгс/см²</li>
+            <li>Температура воды: 280°C</li>
+        </ul>
+        
+        <h2>Последствия взрыва</h2>
+        <p>
+            В результате взрыва в атмосферу было выброшено около 190 тонн радиоактивных веществ. Опасные радиоактивные вещества выделялись в окружающую среду из-за пожара, длившегося почти две недели.
+        </p>
+        
+        <div class="terminal">
+            > УРОВЕНЬ РАДИАЦИИ В ПРИПЯТИ (27.04.1986 14:00)<br>
+            > ЦЕНТР ГОРОДА: 1 Р/ч<br>
+            > РЫНОЧНАЯ ПЛОЩАДЬ: 0,5 Р/ч<br>
+            > ШКОЛА №1: 0,2 Р/ч<br>
+            > ПЛОЩАДЬ ЛЕНИНА: <span class="warning">15 Р/ч</span>
+        </div>
+        
+        <h2>Эвакуация населения</h2>
+        <p>
+            Эвакуация города Припять (47 500 жителей) была проведена 27 апреля. В первые дни после аварии было эвакуировано население 10-километровой зоны. В последующие дни было эвакуировано население других населённых пунктов 30-километровой зоны.
+        </p>
+        
+        <div class="dosimeter">
+            ТЕКУЩИЙ УРОВЕНЬ: <span id="currentRad">0.05</span> мЗв/ч <span class="blink">_</span>
+        </div>
+        
+        <h3>Справочная информация:</h3>
+        <p>
+            Нормальный радиационный фон: 0.0002-0.0003 мЗв/ч<br>
+            Опасный уровень: >0.003 мЗв/ч<br>
+            Смертельный уровень: >10 Зв/ч
+        </p>
+    </div>
+    
+    <script>
+        // Имитация работы дозиметра
+        function updateDosimeter() {
+            // Случайные колебания радиации
+            let radValue = (Math.random() * 0.1 + 0.02).toFixed(2);
+            document.getElementById('currentRad').textContent = radValue;
+            
+            // Периодические "всплески" радиации
+            if (Math.random() > 0.95) {
+                let spike = (Math.random() * 2 + 0.5).toFixed(1);
+                document.getElementById('currentRad').textContent = spike;
+                document.getElementById('currentRad').className = 'warning';
+                setTimeout(() => {
+                    document.getElementById('currentRad').className = '';
+                }, 2000);
+            }
+            
+            setTimeout(updateDosimeter, 3000);
+        }
+        
+        // Запуск дозиметра
+        updateDosimeter();
+    </script>
+</body>
+</html>
